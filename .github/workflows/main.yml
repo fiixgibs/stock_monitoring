@@ -1,0 +1,27 @@
+name: Run Python Script Every 2 Weeks
+
+on:
+  schedule:
+    - cron: "0 0 */14 * *"  # This runs every 14 days
+
+jobs:
+  run-python-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'  # Specify your Python version
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # Add any Python dependencies here if your script needs them
+          # pip install -r requirements.txt
+
+      - name: Run the Python script
+        run: |
+          python Data_Processing_Rev00.py
